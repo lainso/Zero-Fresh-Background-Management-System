@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>凌点生鲜 | 管理员首页</title>
+    <link rel="shortcut icon" href="/resources/img/logo.ico">
+    <link rel="stylesheet" href="/resources/css/index.css">
+    <style>
+        .my-main-list {
+            padding-top: 5%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            
+        }
+
+        .my-main-list-item {
+            border: 1px solid blue;
+            padding: 0 1.2rem;
+            width: 40%;
+            position: relative;
+            min-width: 370px;
+        }
+
+        .my-del-btn {
+            background-color: rgb(245, 117, 117);
+            margin-left: 5rem;
+        }
+
+        .my-fix-btn {
+            background-color: rgb(106, 254, 182);
+            margin-left: 5rem;
+        }
+
+        .my-item-head {
+            margin-left: 10%;
+            display: inline-block;
+            width: 7rem;
+            color: rgb(27, 112, 250);
+        }
+
+        #super {
+            text-align: center;
+            justify-content: center;
+            font-size: x-large;
+            margin-top: 5rem;
+        }
+
+        .my-fix-area {
+            z-index: 1;
+            justify-content: center;
+            text-align: center;
+            position: fixed;
+            left: 46%;
+            top: 35%;
+            padding: .5rem 2rem;
+            background-color: rgb(200, 252, 227);
+            border-radius: 20px;
+        }
+    </style>
+    <script src="/resources/jQuery/3.6.1/jquery-3.6.1.min.js"></script>
+    <script src="/resources/js/my.js"></script>
+    <script src="/resources/js/commen.js"></script>
+</head>
+
+<body>
+    <div class="nav-logo" style="cursor: pointer;">凌点生鲜</div>
+    <nav>
+        <ol class="nav-bar">
+            <li class="click-pro"><span>🍉 产品</span> </li>
+            <li><span class="click-cus">👨 客户</span></li>
+            <li class="top-bar"><span>🚄 渠道</span>
+                <ul class="drop-menu hidden">
+                    <li class="drop-item click-chan">🧱 渠道入口1</li>
+                    <div class="line"></div>
+                    <li class="drop-item click-chan">🧱 渠道入口2</li>
+                </ul>
+            </li>
+            <li><span class="click-order">📝 订单</span></li>
+            <li class="top-bar"><span>📊 统计</span>
+                <ul class="drop-menu hidden">
+                    <li class="drop-item click-count">🥇 统计1</li>
+                    <div class="line"></div>
+                    <li class="drop-item click-count">🥈 统计2</li>
+                </ul>
+            </li>
+        </ol>
+
+        <ol class="nav-bar" style="margin-left: auto; margin-right:1.5rem">
+            <li class="top-bar top-right"><span>🙍‍♂️ 超级管理员</span>
+                <ul class="drop-menu hidden" style="right:0;">
+                    <li class="drop-item click-mgr">📰 账号管理</li>
+                    <div class="line"></div>
+                    <li class="drop-item click-signout">🔐 退出登录</li>
+                </ul>
+            </li>
+        </ol>
+    </nav>
+    <ul class="side-menu">
+        <li class="menu-header" style="padding-top: 15px;">操作菜单 👇</li>
+        <li class="menu-item click-pro">🍉 产品</li>
+        <li class="menu-item click-cus">👨 客户</li>
+        <li class="menu-item openable side-bar">🚄 渠道
+            <ul class="sub-menu hidden">
+                <li class="menu-item click-chan">🧱 渠道入口1</li>
+                <li class="menu-item click-chan">🧱 渠道入口2</li>
+            </ul>
+        </li>
+        <li class="menu-item click-order">📝 订单</li>
+        <li class="menu-item openable side-bar">📊 统计
+            <ul class="sub-menu hidden">
+                <li class="menu-item click-count">🥇 统计1</li>
+                <li class="menu-item click-count">🥈 统计2</li>
+            </ul>
+        </li>
+    </ul>
+    <main>
+        <p id="super">现问明日仍尚早，还请君歌且徐行✨<br><br>尊敬的超级管理员 <span id="uname"></span> ，您好！</p>
+        <div class="my-main-list">
+            <div class='my-main-list-item'>
+                <p><span class='my-item-head'>用户账号</span><span id="uaccount"></span></p>
+                <p><span class='my-item-head'>电子邮件</span><span id="umail"></span></p>
+                <p><button class="my-fix-btn">修改账号信息</button><button class="my-del-btn">删除账号并退出</button></p>
+            </div>
+        </div>
+        <div class="my-fix-area hidden">
+            <p>修改账户信息</p>
+            <p><span class='item-head'>用户账号</span><input type="text" id="fix-account" class="input-M" disabled></p>
+            <p><span class='item-head'>用户名</span><input type="text" id="fix-name" class="input-M"></p>
+            <p><span class='item-head'>电子邮件</span><input type="text" id="fix-mail" class="input-M"></p>
+            <p><span class='item-head'>登录密码</span><input type="password" id="fix-pass" class="input-M"></p>
+            <p><span class='item-head'>确认登录密码</span><input type="password" id="fix-repass" class="input-M"></p>
+            <p><button id="fix-submit">确认</button><button id="fix-cancel">取消</button></p>
+        </div>
+    </main>
+    <div class="foot-left">Contact Me By<br><a href="https://github.com/lainso" target="_blank">GitHub</a></div>
+    <footer><span>lains 版权所有</span><span> <small>©2023 copy rights reserved</small></span></footer>
+</body>
+
+</html>

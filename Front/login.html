@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>凌点生鲜 | 用户登录</title>
+    <link rel="shortcut icon" href="/resources/img/logo.ico">
+    <script src="/resources/jQuery/3.6.1/jquery-3.6.1.min.js"></script>
+    <style>
+        body {
+            background-color: #e3f9fd;
+        }
+
+        main {
+            background-color: #f0fcff;
+            width: 400px;
+            margin: auto;
+            margin-top: 20vh;
+            text-align: center;
+            border-radius: 20px;
+        }
+
+        main img {
+            width: 50px;
+            border-radius: 50%;
+            margin-right: .5rem;
+        }
+
+        input {
+            border-radius: 6px;
+        }
+
+        button {
+            border-radius: 6px;
+        }
+    </style>
+    <script>
+        window.onload = () => {
+            $.ajax({
+                url: 'api/super/gettoken',
+                type: 'GET',
+                success: function (data, status, xhr) {
+                    sessionStorage.setItem('CSRF_TOKEN',data.csrf_token)
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    alert('获取CSRF_TOKEN失败：\n' + `${xhr.status} \n${textStatus} \n${errorThrown}`)
+                }
+            })
+            document.querySelector('#login').onclick = () => {
+                let username = document.querySelector('#name').value
+                let password = document.querySelector('#pass').value
+                $.ajax({
+                    url: 'api/super/signin',
+                    type: 'POST',
+                    headers: {'X-CSRFToken': sessionStorage.getItem('CSRF_TOKEN')},
+                    data: { username: username, password: password },
+                    success: function (data, status, xhr) {
+                        if (data.code === 0) {
+                            location.href = '/index.html'
+                            localStorage.setItem('curr_user', username)
+                        } else {
+                            alert('登录失败：' + data.info)
+                        }
+                    },
+                    error: function (xhr, textStatus, errorThrown) {
+                        alert('登录失败：\n' + `${xhr.status} \n${textStatus} \n${errorThrown}`)
+                    }
+                })
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <main>
+        <br>
+        <div style="display: flex; justify-content: center;">
+            <img src="/resources/img/logo.png" alt="logo">
+            <span style="font-size: 2.3rem; font-weight: bold;">凌 点 生 鲜</span>
+        </div>
+
+        <p style="font-weight: lighter; font-size: 15px;">🔑 用 户 登 录</p>
+        <div>
+            <input type="text" placeholder="👨‍💼 用户账号" id="name"
+                style="margin-top: 17px; line-height: 24px; width: 250px;">
+        </div>
+        <div>
+            <input type="password" placeholder="🔐 用户密码" id="pass"
+                style="margin-top: 15px; line-height: 24px; width: 250px;">
+        </div>
+        <div>
+            <button style="margin-top: 15px; width: 80px; height: 30px; font-size: .9rem;" id="login">📍 登 录 </button>
+        </div>
+        <div>
+            <br>
+            👋 新用户？
+            <a href="/register.html" target="_self" style="text-decoration: none; color: rgb(59, 130, 246);
+            ">👉 加入我们</a>
+        </div>
+        <br>
+    </main>
+</body>
+
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>凌点生鲜 | 管理员首页</title>
+    <link rel="shortcut icon" href="/resources/img/logo.ico">
+    <link rel="stylesheet" href="/resources/css/index.css">
+    <script src="/resources/jQuery/3.6.1/jquery-3.6.1.min.js"></script>
+    <script src="/resources/js/product.js"></script>
+    <script src="/resources/js/commen.js"></script>
+</head>
+
+<body>
+    <div class="nav-logo" style="cursor: pointer;">凌点生鲜</div>
+    <nav>
+        <ol class="nav-bar">
+            <li class="click-pro"><span>🍉 产品</span> </li>
+            <li><span class="click-cus">👨 客户</span></li>
+            <li class="top-bar"><span>🚄 渠道</span>
+                <ul class="drop-menu hidden">
+                    <li class="drop-item click-chan">🧱 渠道入口1</li>
+                    <div class="line"></div>
+                    <li class="drop-item click-chan">🧱 渠道入口2</li>
+                </ul>
+            </li>
+            <li><span class="click-order">📝 订单</span></li>
+            <li class="top-bar"><span>📊 统计</span>
+                <ul class="drop-menu hidden">
+                    <li class="drop-item click-count">🥇 统计1</li>
+                    <div class="line"></div>
+                    <li class="drop-item click-count">🥈 统计2</li>
+                </ul>
+            </li>
+        </ol>
+
+        <ol class="nav-bar" style="margin-left: auto; margin-right:1.5rem">
+            <li class="top-bar top-right"><span>🙍‍♂️ 超级管理员</span>
+                <ul class="drop-menu hidden" style="right:0;">
+                    <li class="drop-item click-mgr">📰 账号管理</li>
+                    <div class="line"></div>
+                    <li class="drop-item click-signout">🔐 退出登录</li>
+                </ul>
+            </li>
+        </ol>
+    </nav>
+    <ul class="side-menu">
+        <li class="menu-header" style="padding-top: 15px;">操作菜单 👇</li>
+        <li class="menu-item click-pro">🍉 产品</li>
+        <li class="menu-item click-cus">👨 客户</li>
+        <li class="menu-item openable side-bar">🚄 渠道
+            <ul class="sub-menu hidden">
+                <li class="menu-item click-chan">🧱 渠道入口1</li>
+                <li class="menu-item click-chan">🧱 渠道入口2</li>
+            </ul>
+        </li>
+        <li class="menu-item click-order">📝 订单</li>
+        <li class="menu-item openable side-bar">📊 统计
+            <ul class="sub-menu hidden">
+                <li class="menu-item click-count">🥇 统计1</li>
+                <li class="menu-item click-count">🥈 统计2</li>
+            </ul>
+        </li>
+    </ul>
+    <main>
+        <div class="menu">
+            <div class="search-area">
+                <button id="sea-btn">展开搜索功能块</button>
+                <div class="sea-text hidden">
+                    <p><span class='item-head' style="width: 4rem;">产品名</span><input class="input-M" type="text" id="sea-name"></input>
+                    <button id="search" style="margin-left: 1rem;">搜索</button></p>
+                </div>
+            </div>
+            <div class="add-area">
+                <button id="add-btn">展开添加功能块</button>
+                <div class="add-form hidden">
+                    <p><span class='item-head'>产品名</span><input class="input-M" type="text" id="add-name"></input></p>
+                    <p><span class='item-head'>保质期(天)</span><input class="input-M" type="text" id="add-date"></input></p>
+                    <p><span class='item-head'>产品价格(元)</span><input class="input-M" type="text" id="add-price"></input></p>
+                    <p><span class='item-head'>产品库存</span><input class="input-M" type="text" id="add-num"></input></p>
+                    <p><span class='item-head'>备注</span><input class="input-L" type="text" id="add-des"></input></p>
+                    <div class="add-btn"><button id="add-submit">提交</button></div>
+                </div>
+            </div>
+        </div>
+        <div class="fix-area hidden">
+            <p>输入新信息</p>
+            <p><span class='item-head'>产品名</span><input type="text" id="fix-name" class="input-M"></p>
+            <p><span class='item-head'>保质期(天)</span><input type="text" id="fix-date" class="input-M"></p>
+            <p><span class='item-head'>产品价格(元)</span><input type="text" id="fix-price" class="input-M"></p>
+            <p><span class='item-head'>产品库存</span><input type="text" id="fix-num" class="input-M"></p>
+            <p><span class='item-head'>备注</span><input type="text" id="fix-des" class="input-M"></p>
+            <p><button id="fix-submit">确认</button><button id="fix-cancel">取消</button></p>
+        </div>
+        <div class="main-list"></div>
+        <div class="page-area">
+            <button id="up-page"><上一页</button>
+            <span>第</span><input id="page-num" type="text" class="input-S"></input><span style="margin-right: .5rem;">/ <span id="t-page"></span> 页</span><button id="jump-btn">跳转</button>
+            <button id="down-page">下一页></button>
+        </div>
+    </main>
+    <div class="foot-left">Contact Me By<br><a href="https://github.com/lainso" target="_blank">GitHub</a></div>
+    <footer><span>lains 版权所有</span><span> <small>©2023 copy rights reserved</small></span></footer>
+</body>
+
+</html>

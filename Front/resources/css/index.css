@@ -1,0 +1,302 @@
+body {
+    height: 100vh;
+    max-width: 1500px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    grid-template-columns: minmax(11rem, 250px) 1fr;
+}
+
+.nav-logo {
+    color: rgb(59, 130, 246);
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    text-align: center;
+    justify-content: center;
+    background: white;
+    border-left: 1px solid #c7c6c6;
+}
+
+.nav-bar>li {
+    position: relative;
+    padding: .7rem .7rem;
+    cursor: pointer;
+}
+
+.nav-bar li:hover {
+    color: rgb(59, 130, 246);
+    background-color: white;
+}
+
+/* 侧边栏 */
+.side-menu {
+    user-select: none;
+    border-left: 1px solid #c7c6c6;
+    border-top: 1px solid #c7c6c6;
+    background: white;
+    margin: 0;
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    gap: .2rem;
+}
+
+.side-menu .menu-item {
+    padding: .5rem 0 .5rem 1.2rem;
+    cursor: pointer;
+}
+
+.side-menu .menu-item:hover {
+    background-color: #f0fcff;
+}
+
+.openable {
+    border-left: 2px solid rgb(180, 209, 255);
+}
+
+.sub-menu .menu-item {
+    color: #6b6464;
+}
+
+.sub-menu .menu-item:hover {
+    background-color: #e3f9fd;
+}
+
+.sub-menu {
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    gap: .4rem;
+    padding-left: .7rem;
+    margin: 5px;
+    font-size: .97rem;
+}
+
+nav {
+    background: rgb(59, 130, 246);
+    color: white;
+    display: flex;
+    gap: .5em;
+    flex-flow: row wrap;
+    min-width: 50rem;
+}
+
+.line {
+    height: 0;
+    border-top: 1px solid #e8dcdc;
+}
+
+.drop-menu .drop-item {
+    cursor: pointer;
+    padding: .4rem;
+    color: rgb(59, 130, 246);
+    padding-left: 12px;
+}
+
+.drop-menu .drop-item:hover {
+    background-color: #f0fcff;
+    color: blue;
+}
+
+.drop-menu {
+    position: absolute;
+    list-style-type: none;
+    background-color: white;
+    margin-top: .75rem;
+    font-size: .97rem;
+    padding-left: 0;
+    width: 8rem;
+    border-left: 1px solid #e8dcdc;
+    border-right: 1px solid #e8dcdc;
+    border-bottom: 1px solid #e8dcdc;
+}
+
+main {
+    background: #eeeeee;
+}
+
+.foot-left {
+    font-size: small;
+    text-align: center;
+    background: white;
+}
+
+footer {
+    background: #e9e9e6;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    text-align: center;
+    justify-content: center;
+    padding: .5rem;
+}
+
+a {
+    display: inline;
+    text-decoration: none;
+}
+
+button {
+    cursor: pointer;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.input-L {
+    width: 17rem;
+    height: 1rem;
+}
+
+.input-M {
+    height: 1rem;
+}
+
+.input-S {
+    height: 1rem;
+    width: 2rem;
+}
+
+/* 上方导航栏 */
+.nav-bar {
+    user-select: none;
+    list-style-type: none;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    margin: 0;
+}
+
+.main-list {
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.main-list-item {
+    border: 1px solid blue;
+    padding: 0 1.2rem;
+    width: 50%;
+    position: relative;
+}
+
+.item-head {
+    display: inline-block;
+    width: 7rem;
+    color: rgb(27, 112, 250);
+}
+
+.menu {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+.add-area {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 1.2rem 0 0 0;
+}
+
+.add-btn {
+    display: flex;
+    justify-content: center;
+}
+
+.search-area {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 1.2rem 0 0 0;
+}
+
+.sea-btn {
+    display: inline;
+    justify-content: center;
+}
+
+.page-area {
+    display: flex;
+    justify-content: center;
+    gap: .3rem;
+    margin-bottom: 1.5rem;
+}
+
+#jump-btn {
+    margin-right: 3.5rem;
+}
+
+#up-page {
+    margin-right: 3.5rem;
+}
+
+.del-btn {
+    background-color: rgb(245, 117, 117);
+    position: absolute;
+    right: 1.5rem;
+}
+
+.fix-btn {
+    background-color: rgb(106, 254, 182);
+    position: absolute;
+    right: 1.5rem;
+}
+
+.fix-area {
+    z-index: 1;
+    justify-content: center;
+    text-align: center;
+    position: fixed;
+    left: 42%;
+    top: 35%;
+    padding: .5rem 2rem;
+    background-color: rgb(200, 252, 227);
+    border-radius: 20px;
+}
+
+#fix-submit {
+    margin-right: 2.5rem;
+    width: 3rem;
+}
+
+#fix-cancel {
+    width: 3rem;
+}
+
+.index {
+    justify-content: center;
+    text-align: center;
+    margin-top: 3rem;
+}
+
+.index p {
+    font: 1.5rem sans-serif;
+    color: #3c3535;
+}
+
+.index img {
+    border-radius: 30px;
+}
+
+#add-pro {
+    margin-right: 1.2rem;
+}
+
+.list-info {
+    margin-right: 1rem;
+}
+
+.top-right{
+    min-width: 60px;
+}
