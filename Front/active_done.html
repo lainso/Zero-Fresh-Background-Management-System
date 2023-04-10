@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>凌点生鲜 | 激活成功</title>
+    <link rel="shortcut icon" href="/resources/img/logo.ico">
+    <script src="/resources/jQuery/3.6.1/jquery-3.6.1.min.js"></script>
+    <style>
+        body {
+            background-color: #e3f9fd;
+        }
+        main {
+            background-color: #f0fcff;
+            width: 400px;
+            margin: auto;
+            margin-top: 20vh;
+            text-align: center;
+            border-radius: 20px;
+        }
+        main img {
+            width: 50px;
+            border-radius: 50%;
+            margin-right: .5rem;
+        }
+        input {
+            border-radius: 6px;
+        }
+        button {
+            border-radius: 6px;
+        }
+    </style>
+    <script>
+        window.onload = ()=>{
+            var token = new URLSearchParams(window.location.search).get('token');
+            $.ajax({
+                url: `api/super/active?token=${token}`,
+                type: 'GET',
+                success: function (data, status, xhr) {
+                    if(data.code==0){
+                        let p = '<p>恭喜您！<br>账户激活成功！</p>'
+                        document.querySelector('#main-info').innerHTML = p
+                    }else{
+                        let p2 = '<p>账户激活失败！<br>请重试！</p>'
+                        document.querySelector('#main-info').innerHTML = p2
+                    }
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    alert('激活失败：\n' + `${xhr.status} \n${textStatus} \n${errorThrown}`)
+                }
+            })
+        }
+    </script>
+</head>
+
+<body>
+    <main>
+        <br>
+        <div style="display: flex; justify-content: center;">
+            <img src="/resources/img/logo.png" alt="logo">
+            <span style="font-size: 2.3rem; font-weight: bold;">凌 点 生 鲜</span>
+        </div>
+        <p id='main-info'></p>
+        <div>
+            <a href="/login.html" target="_self" style="text-decoration: none; color: rgb(59, 130, 246);
+            ">立即登录👈</a>
+        </div>
+        <br>
+    </main>
+</body>
+
+</html>

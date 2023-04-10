@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>凌点生鲜 | 密码重置</title>
+    <link rel="shortcut icon" href="/resources/img/logo.ico">
+    <script src="/resources/jQuery/3.6.1/jquery-3.6.1.min.js"></script>
+    <style>
+        .fix-area {
+            width: 15%;
+            z-index: 1;
+            justify-content: center;
+            text-align: center;
+            position: fixed;
+            left: 40%;
+            top: 48%;
+            padding: .5rem 2rem;
+            background-color: rgb(200, 252, 227);
+            border-radius: 20px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        body {
+            background-color: #e3f9fd;
+        }
+
+        main {
+            background-color: #f0fcff;
+            width: 400px;
+            margin: auto;
+            margin-top: 20vh;
+            text-align: center;
+            border-radius: 20px;
+        }
+
+        main img {
+            width: 50px;
+            border-radius: 50%;
+            margin-right: .5rem;
+        }
+
+        input {
+            border-radius: 6px;
+        }
+
+        button {
+            border-radius: 6px;
+        }
+    </style>
+    <script>
+        window.onload = () => {
+            function getCookie(name) {
+                var cookieValue = null;
+                if (document.cookie && document.cookie !== '') {
+                    var cookies = document.cookie.split(';');
+                    for (var i = 0; i < cookies.length; i++) {
+                        var cookie = cookies[i].trim();
+                        if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                            break;
+                        }
+                    }
+                }
+                return cookieValue;
+            }
+            
+            $.ajax({
+                url: 'api/super/gettoken',
+                type: 'GET',
+                success: function (data, status, xhr) {
+                    sessionStorage.setItem('CSRF_TOKEN', data.csrf_token)
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    alert('获取CSRF_TOKEN失败：\n' + `${xhr.status} \n${textStatus} \n${errorThrown}`)
+                }
+            })
+            document.querySelector('#reset').onclick = () => {
+                document.querySelector('.fix-area').classList.remove("hidden")
+                $.ajax({
+                    url: 'api/super/reset',
+                    type: 'POST',
+                    headers: { 'X-CSRFToken': getCookie('csrftoken') },
+                    data:{
+                        mail: document.querySelector('#mail').value
+                    },
+                    success: function (data, status, xhr) {
+                        if (data.code === 0) {
+                            document.querySelector('.fix-area').classList.add("hidden")
+                            alert('申请提交成功，请检查您的邮箱！')
+                            location.href = '/login.html'
+                        } else {
+                            alert('提交失败：' + data.info)
+                            document.querySelector('.fix-area').classList.add("hidden")
+                        }
+                    },
+                    error: function (xhr, textStatus, errorThrown) {
+                        alert('操作失败：\n' + `${xhr.status} \n${textStatus} \n${errorThrown}`)
+                        document.querySelector('.fix-area').classList.add("hidden")
+                    }
+                })
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <main>
+        <br>
+        <div style="display: flex; justify-content: center;">
+            <img src="/resources/img/logo.png" alt="logo">
+            <span style="font-size: 2.3rem; font-weight: bold;">凌 点 生 鲜</span>
+        </div>
+        <p style="font-weight: lighter; font-size: 15px;">🔑 密 码 重 置 </p>
+        <div>
+            <input type="email" placeholder="📫 请确认你的电子邮件" id="mail"
+                style="margin-top: 15px; line-height: 24px; width: 250px;">
+        </div>
+        <div>
+            <button style="margin-top: 15px; width: 80px; height: 30px; font-size: .9rem;" id="reset">📍 确 认 </button>
+        </div>
+        <div>
+            <br>
+            👋 想起来了？
+            <a href="/login.html" target="_self" style="text-decoration: none; color: rgb(59, 130, 246);
+            ">👉 返回登录</a>
+        </div>
+        <br>
+        <div class="fix-area hidden" style="top: 40%;">
+            <p>处理中，请稍后</p>
+        </div>
+    </main>
+</body>
+
+</html>

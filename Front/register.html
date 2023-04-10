@@ -9,6 +9,23 @@
     <link rel="shortcut icon" href="/resources/img/logo.ico">
     <script src="/resources/jQuery/3.6.1/jquery-3.6.1.min.js"></script>
     <style>
+        .fix-area {
+            width: 15%;
+            z-index: 1;
+            justify-content: center;
+            text-align: center;
+            position: fixed;
+            left: 40%;
+            top: 48%;
+            padding: .5rem 2rem;
+            background-color: rgb(200, 252, 227);
+            border-radius: 20px;
+        }
+
+        .hidden{
+            display: none;
+        }
+
         body {
             background-color: #e3f9fd;
         }
@@ -54,6 +71,7 @@
             }
 
             document.querySelector('#login').onclick = () => {
+                document.querySelector('.fix-area').classList.remove("hidden")
                 let uname = document.querySelector('#uname').value
                 let name = document.querySelector('#name').value
                 let pass = document.querySelector('#pass').value
@@ -67,7 +85,7 @@
                                     $.ajax({
                                         url: 'api/super/register',
                                         type: 'POST',
-                                        headers: {'X-CSRFToken': getCookie('csrftoken')},
+                                        headers: { 'X-CSRFToken': getCookie('csrftoken') },
                                         data: {
                                             fname: uname,
                                             name: name,
@@ -76,30 +94,38 @@
                                         },
                                         success: function (data, status, xhr) {
                                             if (data.code === 0) {
+                                                document.querySelector('.fix-area').classList.add("hidden")
                                                 location.href = '/login.html'
-                                                alert('注册成功，即将跳转登录页')
+                                                alert('注册成功，请前往您的邮箱激活用户')
                                             } else {
+                                                document.querySelector('.fix-area').classList.add("hidden")
                                                 alert('注册失败：' + data.info)
                                             }
                                         },
                                         error: function (xhr, textStatus, errorThrown) {
-                                            alert('注册失败：\n' + `${xhr.status} \n${textStatus} \n${errorThrown}`)
+                                            document.querySelector('.fix-area').classList.add("hidden")
+                                            alert('注册失败：请检查邮箱是否为第一次注册\n' + `${xhr.status} \n${textStatus} \n${errorThrown}`)
                                         }
                                     })
                                 } else {
                                     alert('电子邮箱不能为空')
+                                    document.querySelector('.fix-area').classList.add("hidden")
                                 }
                             } else {
                                 alert('用户名不能为空')
+                                document.querySelector('.fix-area').classList.add("hidden")
                             }
                         } else {
                             alert('密码不能为空')
+                            document.querySelector('.fix-area').classList.add("hidden")
                         }
                     } else {
                         alert('姓名不能为空')
+                        document.querySelector('.fix-area').classList.add("hidden")
                     }
                 } else {
                     alert('两次密码不一致，请检查')
+                    document.querySelector('.fix-area').classList.add("hidden")
                 }
             }
         }
@@ -113,7 +139,6 @@
             <img src="/resources/img/logo.png" alt="logo">
             <span style="font-size: 2.3rem; font-weight: bold;">凌 点 生 鲜</span>
         </div>
-
         <p style="font-weight: lighter; font-size: 15px;">💼 用 户 注 册</p>
         <div>
             <input type="text" placeholder="😉 输入您的姓名" id="uname"
@@ -145,6 +170,9 @@
             ">👉 去登录</a>
         </div>
         <br>
+        <div class="fix-area hidden">
+            <p>处理中，请稍后</p>
+        </div>
     </main>
 </body>
 

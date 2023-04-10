@@ -6,8 +6,12 @@ from django.db import transaction
 from django.db.models import F
 from django.db.models import Q
 from django.http import JsonResponse
-from common.models import Order, OrderProduct
+from django_redis import get_redis_connection
+
+from common.models import Order, OrderProduct, Products
 from lib.handler import dispatcher
+from zero_point import settings
+
 
 def showorder(request):
     try:
@@ -58,8 +62,15 @@ def addorder(request):
                               products_id=product['id'],
                               amount=product['amount'])
                  for product in json.loads(productlist)]
-
         OrderProduct.objects.bulk_create(batch)
+
+        for product in json.loads(productlist):
+            fix_product = Products.objects.get(pk=product['id'])
+            fix_product.num = int(fix_product.num) - int(product['amount'])
+            if fix_product.num<0:
+                return JsonResponse({'code': 1, 'info': '库存不够了！'})
+            fix_product.save()
+            get_redis_connection("default").delete(settings.CacheKey.ProductList)
 
     return JsonResponse({'code': 0, 'info':'succeed', 'id': new_order.id})
 

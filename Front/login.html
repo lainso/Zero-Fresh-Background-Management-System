@@ -42,7 +42,7 @@
                 url: 'api/super/gettoken',
                 type: 'GET',
                 success: function (data, status, xhr) {
-                    sessionStorage.setItem('CSRF_TOKEN',data.csrf_token)
+                    sessionStorage.setItem('CSRF_TOKEN', data.csrf_token)
                 },
                 error: function (xhr, textStatus, errorThrown) {
                     alert('获取CSRF_TOKEN失败：\n' + `${xhr.status} \n${textStatus} \n${errorThrown}`)
@@ -54,7 +54,7 @@
                 $.ajax({
                     url: 'api/super/signin',
                     type: 'POST',
-                    headers: {'X-CSRFToken': sessionStorage.getItem('CSRF_TOKEN')},
+                    headers: { 'X-CSRFToken': sessionStorage.getItem('CSRF_TOKEN') },
                     data: { username: username, password: password },
                     success: function (data, status, xhr) {
                         if (data.code === 0) {
@@ -80,7 +80,6 @@
             <img src="/resources/img/logo.png" alt="logo">
             <span style="font-size: 2.3rem; font-weight: bold;">凌 点 生 鲜</span>
         </div>
-
         <p style="font-weight: lighter; font-size: 15px;">🔑 用 户 登 录</p>
         <div>
             <input type="text" placeholder="👨‍💼 用户账号" id="name"
@@ -91,7 +90,14 @@
                 style="margin-top: 15px; line-height: 24px; width: 250px;">
         </div>
         <div>
-            <button style="margin-top: 15px; width: 80px; height: 30px; font-size: .9rem;" id="login">📍 登 录 </button>
+            <button style="margin: 15px 10px 0 0; width: 80px; height: 30px; font-size: .9rem;" id="login">📍 登 录
+            </button>
+        </div>
+        <div>
+            <br>
+            😖 啊糟糕！
+            <a href="/reset.html" target="_self" style="text-decoration: none; color: rgb(59, 130, 246);
+            ">👉 找回密码</a>
         </div>
         <div>
             <br>

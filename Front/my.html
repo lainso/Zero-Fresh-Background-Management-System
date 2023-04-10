@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>凌点生鲜 | 管理员首页</title>
+    <title>凌点生鲜 | 账户管理</title>
     <link rel="shortcut icon" href="/resources/img/logo.ico">
     <link rel="stylesheet" href="/resources/css/index.css">
     <style>
@@ -16,7 +16,7 @@
             justify-content: center;
             align-items: center;
             gap: 1rem;
-            
+
         }
 
         .my-main-list-item {
@@ -27,14 +27,24 @@
             min-width: 370px;
         }
 
+        .bttn{
+            text-align: center;
+            justify-content: center;
+        }
+
         .my-del-btn {
             background-color: rgb(245, 117, 117);
-            margin-left: 5rem;
+            margin: 0 1rem 0 1rem;
         }
 
         .my-fix-btn {
             background-color: rgb(106, 254, 182);
-            margin-left: 5rem;
+            margin: 0 1rem 0 1rem;
+        }
+
+        .fix-pass {
+            background-color: rgb(210, 254, 106);
+            margin: 0 1rem 0 1rem;
         }
 
         .my-item-head {
@@ -125,7 +135,11 @@
             <div class='my-main-list-item'>
                 <p><span class='my-item-head'>用户账号</span><span id="uaccount"></span></p>
                 <p><span class='my-item-head'>电子邮件</span><span id="umail"></span></p>
-                <p><button class="my-fix-btn">修改账号信息</button><button class="my-del-btn">删除账号并退出</button></p>
+                <p class="bttn">
+                    <button class="my-fix-btn">修改账号信息</button>
+                    <button class="fix-pass">修改账号密码</button>
+                    <button class="my-del-btn">删除账号并退出</button>
+                </p>
             </div>
         </div>
         <div class="my-fix-area hidden">
@@ -133,9 +147,10 @@
             <p><span class='item-head'>用户账号</span><input type="text" id="fix-account" class="input-M" disabled></p>
             <p><span class='item-head'>用户名</span><input type="text" id="fix-name" class="input-M"></p>
             <p><span class='item-head'>电子邮件</span><input type="text" id="fix-mail" class="input-M"></p>
-            <p><span class='item-head'>登录密码</span><input type="password" id="fix-pass" class="input-M"></p>
-            <p><span class='item-head'>确认登录密码</span><input type="password" id="fix-repass" class="input-M"></p>
             <p><button id="fix-submit">确认</button><button id="fix-cancel">取消</button></p>
+        </div>
+        <div class="fix-area hidden" style="left: 52%; top: 40%;">
+            <p>处理中，请稍后</p>
         </div>
     </main>
     <div class="foot-left">Contact Me By<br><a href="https://github.com/lainso" target="_blank">GitHub</a></div>

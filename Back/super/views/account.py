@@ -22,15 +22,12 @@ def fixuser(request):
     except User.DoesNotExist:
         return {'code':1, 'info':f'用户名为{uname}的用户不存在'}
 
-    if 'password' in data:
-        user.set_password(data['password'])
     if 'fname' in data:
         user.first_name = data['fname']
     if 'email' in data:
         user.email = data['email']
 
     user.save()
-
     return JsonResponse({'code':0, 'info':'succeed'})
 
 def deluser(request):

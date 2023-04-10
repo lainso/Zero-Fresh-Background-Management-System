@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>凌点生鲜 | 重置密码</title>
+    <link rel="shortcut icon" href="/resources/img/logo.ico">
+    <script src="/resources/jQuery/3.6.1/jquery-3.6.1.min.js"></script>
+    <style>
+        body {
+            background-color: #e3f9fd;
+        }
+
+        main {
+            background-color: #f0fcff;
+            width: 400px;
+            margin: auto;
+            margin-top: 20vh;
+            text-align: center;
+            border-radius: 20px;
+        }
+
+        main img {
+            width: 50px;
+            border-radius: 50%;
+            margin-right: .5rem;
+        }
+
+        input {
+            border-radius: 6px;
+        }
+
+        button {
+            border-radius: 6px;
+        }
+    </style>
+    <script>
+        window.onload = () => {
+            function getCookie(name) {
+                var cookieValue = null;
+                if (document.cookie && document.cookie !== '') {
+                    var cookies = document.cookie.split(';');
+                    for (var i = 0; i < cookies.length; i++) {
+                        var cookie = cookies[i].trim();
+                        if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                            break;
+                        }
+                    }
+                }
+                return cookieValue;
+            }
+
+            document.querySelector('#submit').onclick = () => {
+                let pass = document.querySelector('#pass').value
+                let repass = document.querySelector('#repass').value
+                sessionStorage.setItem('pass', pass)
+                if (pass === repass) {
+                    $.ajax({
+                        url: 'api/super/reset_done',
+                        type: 'POST',
+                        headers: { 'X-CSRFToken': getCookie('csrftoken') },
+                        data: {
+                            token: new URLSearchParams(window.location.search).get('token'),
+                            passwd: sessionStorage.getItem('pass'),
+                        },
+                        success: function (data, status, xhr) {
+                            if (data.code === 0) {
+                                alert('密码修改成功，即将返回登录！')
+                                location.href = '/login.html'
+                            } else {
+                                alert('密码修改失败：' + data.info)
+                            }
+                        },
+                        error: function (xhr, textStatus, errorThrown) {
+                            alert('密码修改失败：\n' + `${xhr.status} \n${textStatus} \n${errorThrown}`)
+                        }
+                    })
+                } else {
+                    alert('两次输入的密码不一致！')
+                }
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <main>
+        <br>
+        <div style="display: flex; justify-content: center;">
+            <img src="/resources/img/logo.png" alt="logo">
+            <span style="font-size: 2.3rem; font-weight: bold;">凌 点 生 鲜</span>
+        </div>
+        <p style="font-weight: lighter; font-size: 15px;">🔑 密 码 重 置 </p>
+        <div>
+            <input type="password" placeholder="🔒 输入新密码" id="pass"
+                style="margin-top: 15px; line-height: 24px; width: 250px;">
+        </div>
+        <div>
+            <input type="password" placeholder="🔐 确认密码" id="repass"
+                style="margin-top: 15px; line-height: 24px; width: 250px;">
+        </div>
+        <div>
+            <button style="margin-top: 15px; width: 80px; height: 30px; font-size: .9rem;" id="submit">📤 提 交 </button>
+        </div>
+        <br>
+    </main>
+</body>
+
+</html>

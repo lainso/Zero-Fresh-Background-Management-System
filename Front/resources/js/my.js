@@ -49,42 +49,63 @@ function regFix() {
     document.querySelector('#fix-submit').addEventListener('click', () => {
         let uname = document.querySelector('#fix-name').value
         let mail = document.querySelector('#fix-mail').value
-        let pass = document.querySelector('#fix-pass').value
-        let repass = document.querySelector('#fix-repass').value
-        if (pass === repass) {
-            if (uname !== '') {
-                if (mail != '') {
-                    if (pass != '') {
-                        $.ajax({
-                            url: 'api/super/account',
-                            type: 'PUT',
-                            headers: {'X-CSRFToken': getCookie('csrftoken')},
-                            contentType: 'application/json',
-                            data: JSON.stringify({
-                                action: 'fixuser',
-                                username: localStorage.getItem('curr_user'),
-                                data: {
-                                    "fname": uname,
-                                    "email": mail,
-                                    "password": pass,
-                                }
-                            }),
-                            success: function (data, status, xhr) {
-                                if (data.code === 0) {
-                                    alert('用户信息修改成功！')
-                                    location.reload()
-                                } else {
-                                    alert('修改失败：' + data.info)
-                                }
-                            },
-                            error: function (xhr, textStatus, errorThrown) {
-                                alert('修改失败：\n' + `${xhr.status} \n${textStatus} \n${errorThrown}`)
-                            }
-                        })
-                    } else { alert('用户密码不能为空') }
-                } else { alert('用户邮箱不能为空') }
-            } else { alert('用户姓名不能为空') }
-        } else { alert('两次输入的密码不一致，请检查') }
+        if (uname !== '') {
+            if (mail != '') {
+                $.ajax({
+                    url: 'api/super/account',
+                    type: 'PUT',
+                    headers: { 'X-CSRFToken': getCookie('csrftoken') },
+                    contentType: 'application/json',
+                    data: JSON.stringify({
+                        action: 'fixuser',
+                        username: localStorage.getItem('curr_user'),
+                        data: {
+                            "fname": uname,
+                            "email": mail,
+                        }
+                    }),
+                    success: function (data, status, xhr) {
+                        if (data.code === 0) {
+                            alert('用户信息修改成功！')
+                            location.reload()
+                        } else {
+                            alert('修改失败：' + data.info)
+                        }
+                    },
+                    error: function (xhr, textStatus, errorThrown) {
+                        alert('修改失败：\n' + `${xhr.status} \n${textStatus} \n${errorThrown}`)
+                    }
+                })
+            } else { alert('用户邮箱不能为空') }
+        } else { alert('用户姓名不能为空') }
+    })
+
+    document.querySelector('.fix-pass').addEventListener('click',()=>{
+        let res = confirm('是否需要修改账号的密码？')
+        if (res==true){
+            document.querySelector('.fix-area').classList.remove("hidden")
+            $.ajax({
+                url: 'api/super/reset',
+                type: 'POST',
+                headers: { 'X-CSRFToken': getCookie('csrftoken') },
+                data:{
+                    mail: document.querySelector('#fix-mail').value
+                },
+                success: function (data, status, xhr) {
+                    if (data.code === 0) {
+                        document.querySelector('.fix-area').classList.add("hidden")
+                        alert('申请提交成功，请检查您的邮箱！')
+                    } else {
+                        alert('提交失败：' + data.info)
+                        document.querySelector('.fix-area').classList.add("hidden")
+                    }
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    alert('操作失败：\n' + `${xhr.status} \n${textStatus} \n${errorThrown}`)
+                    document.querySelector('.fix-area').classList.add("hidden")
+                }
+            })
+        }
     })
 }
 
@@ -101,7 +122,7 @@ function regDel() {
             $.ajax({
                 url: 'api/super/account',
                 type: 'DELETE',
-                headers: {'X-CSRFToken': getCookie('csrftoken')},
+                headers: { 'X-CSRFToken': getCookie('csrftoken') },
                 contentType: 'application/json',
                 data: JSON.stringify({
                     action: 'deluser',

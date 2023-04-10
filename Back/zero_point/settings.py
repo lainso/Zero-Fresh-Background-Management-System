@@ -25,6 +25,8 @@ SECRET_KEY = 'django-insecure-v8g&&65+jq+4p0n*#*04kid#h)a%(w1pth6^1#mun0gg71ody)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+SERVER_IP = '127.0.0.1:8000'
+WEB_IP = '127.0.0.1:5501'
 ALLOWED_HOSTS = []
 
 
@@ -39,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'common.apps.CommonConfig',
+    'mailer',
 ]
 
 MIDDLEWARE = [
@@ -58,7 +61,7 @@ ROOT_URLCONF = 'zero_point.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -140,3 +143,11 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# email setting
+EMAIL_HOST = 'smtp.qq.com'
+EMAIL_PORT = '587'
+EMAIL_HOST_USER = 'zero-fresh@foxmail.com'
+EMAIL_HOST_PASSWORD = 'puvwggkbtqjoechi'
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
