@@ -23,11 +23,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-v8g&&65+jq+4p0n*#*04kid#h)a%(w1pth6^1#mun0gg71ody)'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-SERVER_IP = '127.0.0.1:8000'
-WEB_IP = '127.0.0.1:5501'
-ALLOWED_HOSTS = []
+SERVER_IP = '8.134.179.231:8000'
+WEB_IP = '8.134.179.231:80'
+ALLOWED_HOSTS = ['*','localhost','127.0.0.1','8.134.179.231']
+SESSION_COOKIE_HTTPONLY = True
 
 
 # Application definition
@@ -41,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'common.apps.CommonConfig',
+    'gunicorn',
     'mailer',
 ]
 
@@ -61,7 +63,7 @@ ROOT_URLCONF = 'zero_point.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],
+        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -84,9 +86,11 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'zero',
-        'USER':'root',
-        'PASSWORD':'123456',
+        'USER':'lains',
+        'PASSWORD':'Lyq123456!!',
         'HOST':'127.0.0.1',
+        'PORT': '3306',
+        'CONN_MAX_AGE': 0
     }
 }
 
