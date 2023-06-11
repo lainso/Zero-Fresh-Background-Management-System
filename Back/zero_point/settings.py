@@ -25,9 +25,9 @@ SECRET_KEY = 'django-insecure-v8g&&65+jq+4p0n*#*04kid#h)a%(w1pth6^1#mun0gg71ody)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-SERVER_IP = '8.134.179.231:8000'
-WEB_IP = '8.134.179.231:80'
-ALLOWED_HOSTS = ['*','localhost','127.0.0.1','8.134.179.231']
+SERVER_IP = ''
+WEB_IP = ''
+ALLOWED_HOSTS = ['*','localhost','127.0.0.1']
 SESSION_COOKIE_HTTPONLY = True
 
 
@@ -86,8 +86,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'zero',
-        'USER':'lains',
-        'PASSWORD':'Lyq123456!!',
+        'USER':'root',
+        'PASSWORD':'123456',
         'HOST':'127.0.0.1',
         'PORT': '3306',
         'CONN_MAX_AGE': 0
@@ -151,7 +151,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # email setting
 EMAIL_HOST = 'smtp.qq.com'
 EMAIL_PORT = '587'
-EMAIL_HOST_USER = 'zero-fresh@foxmail.com'
-EMAIL_HOST_PASSWORD = 'puvwggkbtqjoechi'
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
